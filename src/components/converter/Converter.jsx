@@ -26,40 +26,43 @@ const Converter = () => {
   };
 
   return (
+    <div className="container-app">
     <div className="container">
-      <h1 className="title">Temperature Converter 🌡️</h1>
-      <div className="inputs-container">
-        <input
-          type="number"
-          placeholder="Enter temperature"
-          value={temperature}
-          onChange={(e) => setTemperature(e.target.value)}
-          onKeyDown={handleKeyDown}
-          className="input-field"
-        />
-        <select
-          value={unit}
-          onChange={(e) => setUnit(e.target.value)}
-          className="select-field"
-        >
-          <option value="C">Celsius to Fahrenheit</option>
-          <option value="F">Fahrenheit to Celsius</option>
-        </select>
-        <button
-          onClick={convertTemperature}
-          disabled={!temperature.trim()}
-          className="convert-button"
-        >
-          Convert
-        </button>
-      </div>
-
-      {converted !== null && (
-        <p className="result-text">
-          Converted Temperature: <strong>{converted.toFixed(2)}°{unit === "C" ? "F" : "C"}</strong>
-        </p>
-      )}
+    <h1 className="title">Temperature Converter 🌡️</h1>
+    <div className="inputs-container">
+      <input
+        type="number"
+        placeholder="Enter temperature"
+        value={temperature}
+        onChange={(e) => setTemperature(e.target.value)}
+        onKeyDown={handleKeyDown}
+        className="input-field"
+      />
+      <select
+        value={unit}
+        onChange={(e) => setUnit(e.target.value)}
+        className="select-field"
+      >
+        <option value="C">Celsius to Fahrenheit</option>
+        <option value="F">Fahrenheit to Celsius</option>
+      </select>
+      <button
+        onClick={convertTemperature}
+        disabled={!temperature.trim()}
+        className="convert-button"
+      >
+        Convert
+      </button>
     </div>
+
+    {converted !== null && (
+      <p className="result-text">
+        Converted Temperature: <strong>{converted.toFixed(2)}°{unit === "C" ? "F" : "C"}</strong>
+      </p>
+    )}
+  </div>
+  </div>
+    
   );
 };
 
