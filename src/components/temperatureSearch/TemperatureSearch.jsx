@@ -1,25 +1,31 @@
 import React, { useState } from "react";
+import axios from "axios";
 import "./TemperatureSearch.css";
 
 const TemperatureSearch = () => {
   const [city, setCity] = useState("");
   const [temperature, setTemperature] = useState(null);
-  const API_KEY = "bd5e378503939ddaee76f12ad7a97608"; // 🔥 Reemplaza esto con tu clave de OpenWeatherMap
+  const API_KEY = "bd5e378503939ddaee76f12ad7a97608";
 
   const fetchTemperature = async () => {
     if (!city.trim()) return;
+
     try {
-      const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
+      const response = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather`,
+        {
+          params: {
+            q: city,
+            appid: API_KEY,
+            units: "metric", // Para obtener la temperatura en °C
+          },
+        }
       );
-      const data = await response.json();
-      if (data.main) {
-        setTemperature(data.main.temp);
-      } else {
-        setTemperature("City not found");
-      }
+
+      setTemperature(response.data.main.temp);
     } catch (error) {
       console.error("Error fetching temperature:", error);
+      setTemperature("City not found");
     }
   };
 
